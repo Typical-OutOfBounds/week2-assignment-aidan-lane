@@ -30,7 +30,13 @@ def run_model(rides):
     print(f"Model mean absolute error: {model_mae:.2f} minutes")
 
 if __name__ == "__main__":
-    file_path = "cleaned_data.csv"
+    import argparse
 
-    df = pd.read_csv(file_path, parse_dates=["started_at", "ended_at"])
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "input_csv", help="Cleaned Divvy trip CSV path", nargs="?", default="cleaned_data.csv"
+    )
+    args = parser.parse_args()
+
+    df = pd.read_csv(args.input_csv, parse_dates=["started_at", "ended_at"])
     run_model(df)
