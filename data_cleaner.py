@@ -1,6 +1,11 @@
 import pandas as pd
 
-def clean_data(rides, write=False):
+"""
+Cleans divvy bike data
+
+returns the cleaned dataframe and writes the data to and output path if specified
+"""
+def clean_data(rides, output_path=None):
     rides = rides.rename(columns={"member_casual": "rider_type"})
     rides["rider_type"] = rides["rider_type"].str.strip().str.lower().replace("", pd.NA)
     rides = rides.drop_duplicates()
@@ -17,13 +22,14 @@ def clean_data(rides, write=False):
     #print(f"Kept {len(rides):,} rides and removed {len(raw_rides) - len(rides):,} rows.")
     #rides.head()
 
-    if write:
-        rides.to_csv("cleaned_data.csv")
+    if output_path is not None:
+        rides.to_csv(output_path)
 
     return rides
 
 if __name__ == "__main__":
     file_path = "202101-divvy-tripdata.csv"
+    output_path = "cleaned_data.csv"
 
     df = pd.read_csv(file_path)
-    clean_data(df, write=True)
+    clean_data(df, output_path)
