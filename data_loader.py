@@ -19,9 +19,15 @@ def download_bike_data(archive_name):
 
 
 if __name__ == "__main__":
+    import argparse
     import pandas as pd
 
-    file_path = download_bike_data("202101-divvy-tripdata")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("input_archive", help="divvy archive name", nargs="?", default="202101-divvy-tripdata")
+
+    args = parser.parse_args()
+
+    file_path = download_bike_data(args.input_archive)
 
     df = pd.read_csv(file_path)
 
