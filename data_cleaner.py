@@ -32,8 +32,15 @@ def clean_data(raw_rides, output_path=None):
     return rides
 
 if __name__ == "__main__":
-    file_path = "202101-divvy-tripdata.csv"
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "input_csv", help="Divvy trip CSV path", nargs="?", default="202101-divvy-tripdata.csv"
+    )
+    args = parser.parse_args()
+
     output_filepath = "cleaned_data.csv"
 
-    df = pd.read_csv(file_path)
+    df = pd.read_csv(args.input_csv)
     clean_data(df, output_filepath)
