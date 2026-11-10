@@ -27,7 +27,7 @@ def compare_groups(summary: pd.DataFrame, output_path: str | PathLike[str] | Non
         figsize=(7, 4),
         rot=0,
         color=["#326D9A", "#DF923A"],
-        title="Average Divvy ride duration, January 2021",
+        title="Average Divvy ride duration",
     )
     ax.set_xlabel("Rider type")
     ax.set_ylabel("Mean duration (minutes)")
