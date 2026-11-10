@@ -2,13 +2,13 @@
 
 import pandas as pd
 
-def clean_data(rides, output_path=None):
+def clean_data(raw_rides, output_path=None):
     """
     Cleans divvy bike data
 
     returns the cleaned dataframe and writes the data to and output path if specified
     """
-    rides = rides.rename(columns={"member_casual": "rider_type"})
+    rides = raw_rides.rename(columns={"member_casual": "rider_type"})
     rides["rider_type"] = rides["rider_type"].str.strip().str.lower().replace("", pd.NA)
     rides = rides.drop_duplicates()
 
