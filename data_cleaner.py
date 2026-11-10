@@ -21,6 +21,9 @@ def clean_data(raw_rides, output_path=None):
         (rides["ended_at"] - rides["started_at"]).dt.total_seconds() / 60
     )
     rides = rides.loc[rides["duration_minutes"] > 0].copy()
+    rides["day_type"] = rides["started_at"].dt.dayofweek.ge(5).map(
+        {False: "Weekday", True: "Weekend"}
+    )
     print(f"Kept {len(rides):,} rides and removed {len(raw_rides) - len(rides):,} rows.")
 
     if output_path is not None:

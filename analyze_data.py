@@ -7,11 +7,6 @@ def summarize_rides(rides):
     """
     Summarize rides by rider type and round the output
     """
-    # Classify each trip using its start date. Pandas numbers Monday as 0.
-    rides["day_type"] = rides["started_at"].dt.dayofweek.ge(5).map(
-        {False: "Weekday", True: "Weekend"}
-    )
-
     summary = rides.groupby(["rider_type", "day_type"]).agg(
         ride_count=("ride_id", "size"),
         mean_minutes=("duration_minutes", "mean"),
