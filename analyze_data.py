@@ -40,15 +40,19 @@ def compare_groups(summary, output_path=None):
 
 if __name__ == "__main__":
     import argparse
+    from pathlib import Path
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "input_csv", help="Cleaned Divvy trip CSV path", nargs="?", default="cleaned_data.csv"
     )
+    parser.add_argument(
+        "-o", "--output", type=Path, default="rider_chart.jpg",
+        help="Output image path (default: rider_chart.jpg)",
+    )
     args = parser.parse_args()
-
-    output_filepath = "rider_chart.jpg"
 
     df = pd.read_csv(args.input_csv, parse_dates=["started_at", "ended_at"])
     summarize_rides = summarize_rides(df)
-    compare_groups(summarize_rides, output_filepath)
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    compare_groups(summarize_rides, args.output)
