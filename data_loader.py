@@ -1,12 +1,13 @@
 """Download Divvy bike trip data."""
 
 from io import BytesIO
+from os import PathLike
 from urllib.request import urlopen
 from zipfile import ZipFile
 
 trip_columns = ["ride_id", "member_casual", "started_at", "ended_at"]
 
-def download_bike_data(archive_name, output_dir=None):
+def download_bike_data(archive_name: str, output_dir: str | PathLike[str] | None = None) -> str:
     """Download a Divvy archive, extract it to output_dir, and return the CSV path."""
     archive_url = f"https://divvy-tripdata.s3.amazonaws.com/{archive_name}.zip"
 

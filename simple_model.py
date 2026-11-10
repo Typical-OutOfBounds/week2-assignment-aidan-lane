@@ -2,7 +2,7 @@
 
 import pandas as pd
 
-def run_model(rides):
+def run_model(rides: pd.DataFrame) -> None:
     """
     Run baseline model using median trip time
     """

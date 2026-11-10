@@ -1,9 +1,11 @@
 """Analyzes Divvy bike data"""
 
+from os import PathLike
+
 import matplotlib.pyplot as plt
 import pandas as pd
 
-def summarize_rides(rides):
+def summarize_rides(rides: pd.DataFrame) -> pd.DataFrame:
     """
     Summarize rides by rider type and round the output
     """
@@ -16,7 +18,7 @@ def summarize_rides(rides):
 
     return rounded_summary
 
-def compare_groups(summary, output_path=None):
+def compare_groups(summary: pd.DataFrame, output_path: str | PathLike[str] | None = None) -> None:
     """
     Plot summarized rides by rider type
     """

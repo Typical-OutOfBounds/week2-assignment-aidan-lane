@@ -1,8 +1,12 @@
 """Clean Divvy bike trip data"""
 
+from os import PathLike
+
 import pandas as pd
 
-def clean_data(raw_rides, output_path=None):
+def clean_data(
+    raw_rides: pd.DataFrame, output_path: str | PathLike[str] | None = None
+) -> pd.DataFrame:
     """
     Cleans divvy bike data
 
